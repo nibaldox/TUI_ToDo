@@ -1,0 +1,135 @@
+/* Estilos para la aplicación TUI ToDo */
+
+/* Estilos generales */
+Screen {
+    background: $surface;
+    color: $text;
+    layout: vertical;
+    overflow-y: auto;
+}
+
+Header {
+    dock: top;
+    height: auto;
+    background: $primary-background;
+    color: $text;
+    padding: 0 1;
+}
+
+Footer {
+    dock: bottom;
+    height: auto;
+    background: $primary-background;
+    color: $text;
+    padding: 0 1;
+}
+
+/* Contenedores principales */
+#main_container {
+    layout: horizontal;
+    height: 1fr;
+}
+
+#left_panel {
+    width: 30%;
+    min-width: 25;
+    height: 100%;
+    background: $panel;
+    border-right: solid $primary-lighten-2;
+    padding: 1;
+    overflow-y: auto;
+}
+
+#right_panel {
+    width: 70%;
+    height: 100%;
+    padding: 1 2;
+    background: $surface;
+    overflow-y: auto;
+}
+
+/* Placeholders (temporales) */
+.placeholder {
+    height: 100%;
+    border: dashed $primary-lighten-1;
+    content-align: center middle;
+    color: $text-muted;
+}
+
+#placeholder_sidebar {
+    height: 1fr;
+    content: "Sidebar (en desarrollo)";
+}
+
+#placeholder_content {
+    height: 1fr;
+    content: "Contenido principal (en desarrollo)";
+}
+
+/* Estilos para widgets que se implementarán */
+#calendar {
+    height: auto;
+    padding: 1 0;
+    border-bottom: dashed $primary-lighten-1;
+    margin-bottom: 1;
+}
+
+#sidebar {
+    height: 1fr;
+    background: $panel;
+}
+
+#task_list {
+    height: 1fr;
+}
+
+/* Estilos para elementos de tareas */
+.task {
+    padding: 1;
+    margin-bottom: 1;
+    border: solid $primary-darken-1;
+    background: $panel;
+}
+
+.task-completed {
+    text-decoration: line-through;
+    color: $success;
+}
+
+.task-important {
+    border-left: solid $warning 2;
+}
+
+.task-overdue {
+    border-left: solid $error 2;
+}
+
+/* Estilos para estados de tareas */
+.status-pending {
+    color: $text;
+}
+
+.status-completed {
+    color: $success;
+}
+
+.status-important {
+    color: $warning;
+}
+
+.status-deferred {
+    color: $primary;
+}
+
+.status-question {
+    color: $secondary;
+}
+
+.status-canceled {
+    color: $error;
+    text-decoration: line-through;
+}
+
+.status-partial {
+    color: $warning-darken-1;
+}

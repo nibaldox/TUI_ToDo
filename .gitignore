@@ -1,0 +1,46 @@
+# Entorno virtual
+env/
+venv/
+ENV/
+
+# Archivos de caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Archivos de distribución
+dist/
+build/
+*.egg-info/
+
+# Archivos de logs
+*.log
+
+# Archivos temporales del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de configuración del editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Archivos de respaldo
+*~
+*.bak
+
+# Datos de la aplicación
+tui_todo_data/
+
+# Archivos de configuración local
+.env
+.env.local
+.env.*.local
+
+# Carpetas de datos generados
+data/
+output/

@@ -1,0 +1,91 @@
+/* Estilos para la aplicación Textual */
+
+Screen {
+    background: $surface;
+    color: $text;
+    layout: vertical;
+    overflow-y: auto;
+}
+
+Header {
+    dock: top;
+    height: auto;
+    background: $primary-background;
+    color: $text;
+    padding: 0 1;
+}
+
+Footer {
+    dock: bottom;
+    height: auto;
+    background: $primary-background;
+    color: $text;
+    padding: 0 1;
+}
+
+#main_app_container {
+    layout: horizontal;
+    height: 1fr;
+}
+
+#left_panel {
+    width: 30%;
+    min-width: 25;
+    height: 100%;
+    background: $panel;
+    border-right: solid $primary-lighten-2;
+    padding: 1;
+    overflow-y: auto;
+}
+
+#theme_test_checkbox {
+    width: 100%;
+    padding-bottom: 1;
+}
+
+#calendar {
+    height: auto;
+    padding: 1 0;
+    border-bottom: dashed $primary-lighten-1;
+    margin-bottom: 1;
+}
+
+#sidebar {
+    height: 1fr;
+    background: $panel;
+}
+
+#sidebar Tree {
+    padding: 1 0;
+}
+
+#sidebar .tree--label:hover {
+    background: $primary-background-darken-1;
+}
+
+#sidebar .tree--guides {
+    color: $primary-lighten-3;
+}
+
+#main_content {
+    width: 70%;
+    height: 100%;
+    padding: 1 2;
+    background: $surface;
+    overflow-y: auto;
+}
+
+.main-text-area {
+}
+
+Static .warning {
+    color: yellow;
+}
+
+Static .danger {
+    color: red;
+}
+
+Static .complete {
+    color: dodgerblue;
+}
