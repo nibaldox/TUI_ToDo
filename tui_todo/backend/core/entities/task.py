@@ -53,6 +53,8 @@ class Task:
         tags: Etiquetas asociadas a la tarea
         project_id: ID del proyecto al que pertenece (opcional)
         parent_id: ID de la tarea padre si es una subtarea (opcional)
+        etag: ETag para sincronización CalDAV (opcional)
+        last_modified: Timestamp última modificación (opcional)
         metadata: Metadatos adicionales
     """
     
@@ -67,6 +69,8 @@ class Task:
     tags: List[str] = field(default_factory=list)
     project_id: Optional[str] = None
     parent_id: Optional[str] = None
+    etag: Optional[str] = None  # ETag para sincronización CalDAV
+    last_modified: Optional[datetime] = None  # Timestamp última modificación
     metadata: Dict[str, Any] = field(default_factory=dict)
     
     def complete(self) -> None:
@@ -129,6 +133,8 @@ class Task:
             "tags": self.tags,
             "project_id": self.project_id,
             "parent_id": self.parent_id,
+            "etag": self.etag,
+            "last_modified": self.last_modified.isoformat() if self.last_modified else None,
             "metadata": self.metadata
         }
     
@@ -139,6 +145,7 @@ class Task:
         created_at = datetime.fromisoformat(data["created_at"]) if data.get("created_at") else None
         due_date = datetime.fromisoformat(data["due_date"]) if data.get("due_date") else None
         completed_at = datetime.fromisoformat(data["completed_at"]) if data.get("completed_at") else None
+        last_modified = datetime.fromisoformat(data["last_modified"]) if data.get("last_modified") else None
         
         # Convertir strings de enumeraciones a objetos Enum
         status = TaskStatus(data.get("status", "pending"))
@@ -156,5 +163,7 @@ class Task:
             tags=data.get("tags", []),
             project_id=data.get("project_id"),
             parent_id=data.get("parent_id"),
+            etag=data.get("etag"),
+            last_modified=last_modified,
             metadata=data.get("metadata", {})
         )

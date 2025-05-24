@@ -17,6 +17,7 @@ TUI ToDo es un sistema avanzado de gestión de tareas en terminal que combina la
 ### Fase 0: Configuración del Proyecto y Estructura (Semana 0)
 
 #### Tareas
+
 - [x] Diseñar la arquitectura del proyecto (Clean Architecture)
 - [x] Crear documento de estructura del proyecto (`estructura.md`)
 - [x] Crear la estructura de directorios base
@@ -36,16 +37,18 @@ TUI ToDo es un sistema avanzado de gestión de tareas en terminal que combina la
 ### Fase 1: Estructura Base y Modelos de Datos (Semana 1)
 
 #### Tareas
-- [ ] Definir modelo de datos para tareas (`Task`)
+
+- [x] Definir modelo de datos para tareas (`Task`) # COMPLETADO
   - Atributos: id, título, descripción, estado, fecha_creación, fecha_vencimiento, prioridad, etiquetas, proyecto_id
-- [ ] Definir modelo de datos para proyectos/categorías (`Project`)
+- [x] Definir modelo de datos para proyectos/categorías (`Project`) # COMPLETADO
   - Atributos: id, nombre, descripción, color, padre_id (para jerarquía)
-- [ ] Definir modelo para etiquetas (`Tag`)
+- [x] Definir modelo para etiquetas (`Tag`) # COMPLETADO
   - Atributos: id, nombre, color
-- [ ] Implementar relaciones entre modelos
-- [ ] Crear tests unitarios para los modelos
+- [x] Implementar relaciones entre modelos # COMPLETADO
+- [x] Crear tests unitarios para los modelos # COMPLETADO
 
 #### Entregables
+
 - Módulos Python con clases de modelos
 - Documentación de la estructura de datos
 - Tests unitarios
@@ -53,79 +56,148 @@ TUI ToDo es un sistema avanzado de gestión de tareas en terminal que combina la
 ### Fase 2: Sistema de Almacenamiento (Semana 2)
 
 #### Tareas
-- [ ] Implementar capa de abstracción para almacenamiento (`StorageInterface`)
-- [ ] Desarrollar almacenamiento basado en SQLite
-  - Crear esquema de base de datos
-  - Implementar operaciones CRUD para todos los modelos
-- [ ] Implementar almacenamiento alternativo basado en archivos JSON
-  - Serialización/deserialización de modelos
-  - Gestión de archivos
-- [ ] Crear sistema de migración para actualizaciones futuras
-- [ ] Implementar mecanismo de respaldo automático
+
+- [x] Implementar capa de abstracción para almacenamiento (`StorageInterface`) # COMPLETADO
+- [x] Desarrollar almacenamiento basado en SQLite # COMPLETADO
+  - [x] Crear esquema de base de datos # COMPLETADO
+  - [ ] Implementar almacenamiento alternativo basado en archivos JSON
+    - Serialización/deserialización de modelos
+    - Gestión de archivos
+- [ ] Crear sistema de migración para actualizaciones futuras # PENDIENTE
+- [x] Implementar mecanismo de respaldo automático (`DatabaseService.backup`) # COMPLETADO
 
 #### Entregables
+
 - Módulo de base de datos SQLite funcional
-- Módulo de almacenamiento basado en archivos
+- Módulo de almacenamiento basado en archivos JSON (parcial)
 - Herramientas de migración y respaldo
-- Tests de integración
+- Tests de integración de la capa de almacenamiento
 
 ### Fase 3: Lógica de Negocio y Controladores (Semana 3)
 
+#### Estado actual
+
+- Casos de uso (use cases) implementados para tareas, proyectos y etiquetas.
+- Repositorios y entidades conectados y funcionales.
+- Script de inicialización y datos de ejemplo funcionando.
+- [x] Pruebas unitarias e integración de repositorios y casos de uso completadas.
+
+#### Próximos pasos inmediatos
+
+- [x] Iniciar el desarrollo de la interfaz TUI con Textual
+  - [x] Vista de lista de tareas con filtros
+  - [x] Integración con TaskController para listado de tareas
+  - [ ] Vista de lista de proyectos
+- [ ] Comenzar pruebas manuales de la UI
+- [ ] Documentar componentes y flujos de la interfaz
+
 #### Tareas
-- [ ] Desarrollar controlador de tareas (`TaskController`)
-  - Métodos para crear, actualizar, eliminar y consultar tareas
-  - Lógica para gestionar estados y transiciones
-- [ ] Implementar controlador de proyectos (`ProjectController`)
-  - Gestión de la jerarquía de proyectos
-  - Operaciones de reorganización
-- [ ] Crear sistema de filtros y búsqueda (`FilterController`)
-  - Búsqueda por texto
-  - Filtrado por estado, fecha, etiquetas, etc.
-- [ ] Desarrollar sistema de recordatorios (`ReminderController`)
-  - Lógica para detectar tareas próximas a vencer
-  - Mecanismo de notificación en terminal
+
+- [x] Desarrollar controlador de tareas (`TaskController`)
+  - [x] Métodos para crear, actualizar, eliminar y consultar tareas
+  - [x] Lógica para gestionar estados y transiciones
+- [x] Implementar controlador de proyectos (`ProjectController`)
+  - [x] Gestión de la jerarquía de proyectos
+  - [x] Operaciones de reorganización
+- [x] Crear sistema de filtros y búsqueda (`FilterController`)
+  - [x] Búsqueda por texto
+  - [x] Filtrado por estado, fecha, etiquetas, etc.
+- [x] Desarrollar sistema de recordatorios (`ReminderController`)
+  - [x] Lógica para detectar tareas próximas a vencer
+  - [x] Mecanismo de notificación en terminal
 
 #### Entregables
-- Controladores implementados y documentados
-- Sistema de filtros y búsqueda
-- Mecanismo de recordatorios
-- Tests de funcionalidad
+
+- [x] Controladores implementados y documentados
+- [x] Sistema de filtros y búsqueda
+- [x] Mecanismo de recordatorios
+- [x] Tests de funcionalidad
 
 ### Fase 4: Integración con la Interfaz de Usuario (Semana 4)
 
 #### Tareas
-- [ ] Refactorizar la UI actual para usar los nuevos modelos y controladores
-- [ ] Implementar vistas para gestión de tareas
-  - Vista de lista de tareas con filtros
-  - Vista detallada de tareas
-  - Formularios para crear/editar tareas
-- [ ] Mejorar el widget de calendario para mostrar tareas
-- [ ] Crear sistema de comandos rápidos para operaciones comunes
-- [ ] Implementar atajos de teclado para todas las funcionalidades
+
+- [x] Refactorizar la UI actual para usar nuevos modelos y controladores
+- [x] Implementar vistas para gestión de tareas
+  - [x] Vista de lista de tareas con filtros
+  - [x] Vista detallada de tareas
+  - [x] Formularios para crear/editar tareas
+- [x] Mejorar widget calendario (resaltar días, navegación meses)
+- [x] Crear sistema de comandos rápidos (atajos CRUD)
+- [x] Añadir validación de campos en formularios
+- [x] Diseñar mensaje de confirmación al eliminar tarea
+
+#### Próximos Pasos de UI
+
+- [x] Validar título obligatorio en formularios
+- [x] Implementar ConfirmDialog para eliminación
+- [x] Añadir validación de fecha y notificaciones de error
+- [ ] Documentar flujos de UI en README y manual de usuario
 
 #### Entregables
-- UI integrada con el backend
-- Nuevas vistas y widgets
-- Sistema de comandos y atajos
-- Manual de usuario actualizado
+
+- [x] UI integrada con backend
+- [x] Nuevas vistas y widgets
+- [x] Sistema de comandos y atajos
+- [x] Validaciones y confirmaciones
+- [ ] Manual de usuario actualizado
 
 ### Fase 5: Funcionalidades Avanzadas (Semana 5)
 
 #### Tareas
-- [ ] Implementar sistema de sincronización con servicios externos
-  - Sincronización con CalDAV/CardDAV
-  - Exportación/importación desde formatos estándar (iCal, CSV)
-- [ ] Desarrollar sistema de estadísticas y reportes
-  - Visualización de productividad
-  - Análisis de tiempo por proyecto/categoría
-- [ ] Implementar sistema de plantillas para tareas recurrentes
-- [ ] Crear mecanismo de plugins para extensibilidad
+
+- [x] Sincronización con servicios externos (CalDAV)
+  - [x] Autenticación y manejo de credenciales
+  - [x] Sincronización unidireccional básica
+  - [x] Sincronización bidireccional  
+    - [x] Diseño del modelo de sincronización (UID, etag, metadata)  
+    - [x] Extender `CalDAVSyncService` con métodos `fetch_remote_changes`, `push_local_changes`, manejo de deletes  
+    - [x] Estrategia de resolución de conflictos (“última modificación gana”)  
+    - [ ] Pruebas unitarias e integración con servidor CalDAV simulado  
+    - [x] UI/UX: atajo `sync_bidirectional` y mensajes de estado  
+    - [x] Documentación: actualizar plan y README  
+- [x] Exportación/Importación (iCal, CSV)
+- [ ] Sistema de estadísticas y reportes
+  - [ ] API de estadísticas (backend)
+  - [ ] UI de reportes
+- [ ] Plantillas para tareas recurrentes
+  - [ ] Definir formato de plantilla y frecuencia
+  - [ ] Scheduler para ejecución automática
+- [ ] Framework de plugins
+  - [ ] Diseñar interfaz de extensibilidad
+  - [ ] Cargador dinámico de plugins
+  - [ ] Ejemplo de plugin simple
+
+#### Próximos Pasos Avanzados
+
+- Implementar fetch_events en CalDAVSyncService
+- Crear módulo de export/import (iCal, CSV)
+- Desarrollar StatsService para métricas de tareas
+- [x] Implementar sincronización bidireccional con CalDAV
 
 #### Entregables
-- Módulos de sincronización
-- Sistema de estadísticas y reportes
-- Funcionalidad de plantillas
-- Documentación para desarrolladores (API y plugins)
+
+- [x] Módulo de sincronización completo
+- [x] Funcionalidad de exportación/importación integrada
+- [ ] API y UI de estadísticas funcionando
+- [ ] Plantillas recurrentes operativas
+- [ ] Framework de plugins con documentación y ejemplo
+
+### Fase 6: Empaquetado y Despliegue (Semana 6)
+
+#### Tareas
+
+- [ ] Crear `setup.py` o `pyproject.toml` para distribuir CLI como paquete instalable
+- [ ] Configurar `Dockerfile` e imagen Docker para la aplicación
+- [ ] Configurar pipeline de CI/CD (GitHub Actions) que ejecute tests y despliegue
+- [ ] Publicar paquete en PyPI (opcional)
+
+#### Entregables
+
+- Paquete instalable de la aplicación (CLI)
+- Imagen Docker optimizada
+- Pipeline de CI/CD documentado y funcionando
+- Guía de instalación y despliegue
 
 ## Tecnologías a Utilizar
 
@@ -138,16 +210,19 @@ TUI ToDo es un sistema avanzado de gestión de tareas en terminal que combina la
 ## Consideraciones Técnicas
 
 ### Rendimiento
+
 - Optimizar consultas a la base de datos para mantener la respuesta inmediata
 - Implementar caché para datos frecuentemente accedidos
 - Usar lazy loading para componentes pesados
 
 ### Seguridad
+
 - Cifrar datos sensibles en almacenamiento
 - Validar todas las entradas de usuario
 - Implementar control de acceso si se añade soporte multiusuario
 
 ### Extensibilidad
+
 - Diseñar con patrones que faciliten la extensión (Strategy, Observer, etc.)
 - Documentar APIs internas para facilitar el desarrollo de plugins
 - Mantener separación clara entre lógica de negocio e interfaz

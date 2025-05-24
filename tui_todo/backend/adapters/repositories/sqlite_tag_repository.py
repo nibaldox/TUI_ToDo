@@ -180,31 +180,33 @@ class SQLiteTagRepository(TagRepository):
         
         return self._row_to_tag(row)
     
-    def get_all_with_count(self) -> Dict[Tag, int]:
+    def get_all_with_count(self) -> list:
         """
         Obtiene todas las etiquetas con el número de tareas asociadas.
-        
+
         Returns:
-            Diccionario con etiquetas como claves y conteo como valores
+            Lista de diccionarios con los campos principales de la etiqueta y el conteo de uso:
+            [{"id": ..., "name": ..., "color": ..., "description": ..., "count": ...}, ...]
         """
         cursor = self.connection.cursor()
-        
-        # Obtener todas las etiquetas
         tags = self.get_all()
-        result = {}
-        
-        # Para cada etiqueta, contar cuántas tareas la usan
+        result = []
         for tag in tags:
             cursor.execute('''
-            SELECT COUNT(*) as count FROM tasks 
-            WHERE tags LIKE ?
+                SELECT COUNT(*) as count FROM tasks 
+                WHERE tags LIKE ?
             ''', (f'%"{tag.name}"%',))
-            
             row = cursor.fetchone()
             count = row['count'] if row else 0
-            result[tag] = count
-        
+            result.append({
+                "id": tag.id,
+                "name": tag.name,
+                "color": tag.color,
+                "description": tag.description,
+                "count": count
+            })
         return result
+
     
     def _row_to_tag(self, row: sqlite3.Row) -> Tag:
         """
