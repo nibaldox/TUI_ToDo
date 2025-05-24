@@ -38,10 +38,10 @@ def populate_sample_data(db_service: DatabaseService):
     """
     print("Poblando la base de datos con datos de ejemplo...")
     
-    # Inicializar repositorios
-    task_repo = SQLiteTaskRepository(db_path=DB_FILE)
-    project_repo = SQLiteProjectRepository(db_path=DB_FILE)
-    tag_repo = SQLiteTagRepository(db_path=DB_FILE)
+    # Inicializar repositorios usando db_service
+    task_repo = SQLiteTaskRepository(db_service=db_service)
+    project_repo = SQLiteProjectRepository(db_service=db_service)
+    tag_repo = SQLiteTagRepository(db_service=db_service)
     
     try:
         # Crear etiquetas de ejemplo
@@ -107,11 +107,6 @@ def populate_sample_data(db_service: DatabaseService):
         
     except Exception as e:
         print(f"Error al poblar la base de datos: {e}")
-    finally:
-        # Cerrar conexiones de los repositorios
-        task_repo.close()
-        project_repo.close()
-        tag_repo.close()
 
 
 def main():

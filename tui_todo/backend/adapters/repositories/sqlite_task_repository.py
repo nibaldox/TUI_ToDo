@@ -15,6 +15,7 @@ import json
 
 from ...core.entities.task import Task, TaskStatus, TaskPriority
 from ...core.interfaces.repositories import TaskRepository
+from ..database.database_service import DatabaseService
 
 
 class SQLiteTaskRepository(TaskRepository):
@@ -25,46 +26,18 @@ class SQLiteTaskRepository(TaskRepository):
     SQLite como mecanismo de persistencia.
     
     Attributes:
-        db_path: Ruta al archivo de base de datos SQLite
-        connection: Conexión a la base de datos
+        connection: Conexión a la base de datos gestionada por DatabaseService
     """
     
-    def __init__(self, db_path: str):
+    def __init__(self, db_service: DatabaseService):
         """
-        Inicializa el repositorio con la ruta a la base de datos.
+        Inicializa el repositorio con una instancia de DatabaseService.
         
         Args:
-            db_path: Ruta al archivo de base de datos SQLite
+            db_service: Instancia del servicio de base de datos.
         """
-        self.db_path = db_path
-        self.connection = sqlite3.connect(db_path)
+        self.connection = db_service.get_connection()
         self.connection.row_factory = sqlite3.Row
-        self._create_tables()
-    
-    def _create_tables(self) -> None:
-        """Crea las tablas necesarias si no existen."""
-        cursor = self.connection.cursor()
-        
-        # Tabla de tareas
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS tasks (
-            id TEXT PRIMARY KEY,
-            title TEXT NOT NULL,
-            description TEXT,
-            status TEXT NOT NULL,
-            created_at TEXT NOT NULL,
-            updated_at TEXT,
-            due_date TEXT,
-            completed_at TEXT,
-            priority TEXT NOT NULL,
-            tags TEXT,
-            project_id TEXT,
-            parent_id TEXT,
-            metadata TEXT
-        )
-        ''')
-        
-        self.connection.commit()
     
     def save(self, task: Task) -> Task:
         """
@@ -306,8 +279,3 @@ class SQLiteTaskRepository(TaskRepository):
             parent_id=row['parent_id'],
             metadata=metadata
         )
-    
-    def close(self) -> None:
-        """Cierra la conexión a la base de datos."""
-        if self.connection:
-            self.connection.close()

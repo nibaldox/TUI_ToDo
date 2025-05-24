@@ -15,6 +15,7 @@ import json
 
 from ...core.entities.project import Project
 from ...core.interfaces.repositories import ProjectRepository
+from ..database.database_service import DatabaseService
 
 
 class SQLiteProjectRepository(ProjectRepository):
@@ -25,41 +26,18 @@ class SQLiteProjectRepository(ProjectRepository):
     SQLite como mecanismo de persistencia.
     
     Attributes:
-        db_path: Ruta al archivo de base de datos SQLite
-        connection: Conexión a la base de datos
+        connection: Conexión a la base de datos gestionada por DatabaseService
     """
     
-    def __init__(self, db_path: str):
+    def __init__(self, db_service: DatabaseService):
         """
-        Inicializa el repositorio con la ruta a la base de datos.
+        Inicializa el repositorio con una instancia de DatabaseService.
         
         Args:
-            db_path: Ruta al archivo de base de datos SQLite
+            db_service: Instancia del servicio de base de datos.
         """
-        self.db_path = db_path
-        self.connection = sqlite3.connect(db_path)
+        self.connection = db_service.get_connection()
         self.connection.row_factory = sqlite3.Row
-        self._create_tables()
-    
-    def _create_tables(self) -> None:
-        """Crea las tablas necesarias si no existen."""
-        cursor = self.connection.cursor()
-        
-        # Tabla de proyectos
-        cursor.execute('''
-        CREATE TABLE IF NOT EXISTS projects (
-            id TEXT PRIMARY KEY,
-            name TEXT NOT NULL,
-            description TEXT,
-            color TEXT NOT NULL,
-            created_at TEXT NOT NULL,
-            updated_at TEXT,
-            parent_id TEXT,
-            metadata TEXT
-        )
-        ''')
-        
-        self.connection.commit()
     
     def save(self, project: Project) -> Project:
         """
@@ -239,8 +217,3 @@ class SQLiteProjectRepository(ProjectRepository):
             parent_id=row['parent_id'],
             metadata=metadata
         )
-    
-    def close(self) -> None:
-        """Cierra la conexión a la base de datos."""
-        if self.connection:
-            self.connection.close()
